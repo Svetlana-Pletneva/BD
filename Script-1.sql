@@ -22,11 +22,3 @@ create table if not exists tracks (
 	title text not null,
 	track_time time,
 	album_id integer references album(album_id)
-);
-
-create table if not exists collection (
-	collection_id serial primary key,
-	name varchar (100) not null,
-	year date not null,
-	track_id integer references tracks(track_id)
-);
