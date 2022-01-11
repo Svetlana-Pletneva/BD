@@ -10,6 +10,8 @@ create table if not exists artist (
 	genre integer references genre (genre_id)
 );
 
+alter table artist drop column genre;
+
 create table if not exists album (
 	album_id serial primary key,
 	name varchar(100) not null,
@@ -29,4 +31,22 @@ create table if not exists collection (
 	name varchar (100) not null,
 	year date not null,
 	track_id integer references tracks(track_id)
+);
+
+create table if not exists ArtistGenre (
+	id serial primary key,
+	artist_id integer not null references artist(artist_id),
+	genre_id integer not null references genre(genre_id)
+);
+
+create table if not exists ArtistAlbum (
+	id serial primary key,
+	artist_id integer not null references artist(artist_id),
+	album_id integer not null references album (album_id)
+);
+
+create table if not exists TrackCollection (
+	id serial primary key,
+	track_id integer not null references tracks(track_id),
+	collection_id integer not null references collection(collection_id)
 );
